@@ -1,14 +1,22 @@
-{% extends "base.html" %}
+{% extends "layout.html" %}
+
 {% block content %}
+<h2>📝Edit Task</h2>
 
-<h2>Edit Task</h2>
+<div class="card">
+    <form method="POST" class="task-form">
+        <div class="form-group">
+            <label for="content">Task:</label>
+            <input type="text" id="content" name="content" value="{{ task.content }}" required>
+        </div>
 
-<form method="POST">
+        <div class="form-group">
+            <label for="due_date">Due Date:</label>
+            <input type="date" id="due_date" name="due_date"
+                   value="{{ task.due_date.strftime('%Y-%m-%d') if task.due_date else '' }}">
+        </div>
 
-    <input type="text" name="content" value="{{ task.content }}" required>
-    <input type="date" name="due_date" value="{{ task.due_date.strftime('%Y-%m-%d') if task.due_date else '' }}">
-
-    <button type="submit">Update</button>
-</form>
-
+        <button type="submit" class="task-button edit">Update</button>
+    </form>
+</div>
 {% endblock %}

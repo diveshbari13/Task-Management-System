@@ -1,24 +1,64 @@
 {% extends "layout.html" %}
 
 {% block content %}
-    <h2>Edit Profile</h2>
+<h1>⚙️Settings </h1>
 
-    <form method="POST">
-        <div class="form-group">
-            <label for="username">Username</label>
-            <input type="text" id="username" name="username" value="{{ current_user.username }}" required>
-        </div>
+<div class="card settings-form">
+<h2>✏️Edit Profile</h2>
 
-        <div class="form-group">
-            <label for="email">Email</label>
-            <input type="email" id="email" name="email" value="{{ current_user.email }}" required>
-        </div>
+<form method="POST" action="{{ url_for('settings') }}">
+    <input type="hidden" name="form_type" value="profile">
+    <div class="form-group">
+        <label for="username">Username</label>
+        <input type="text" id="username" name="username" value="{{ current_user.username }}" required>
+    </div>
 
-        <div class="form-group">
-            <label for="password">New Password (leave blank to keep current password)</label>
-            <input type="password" id="password" name="password">
-        </div>
+    <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" value="{{ current_user.email }}" required>
+    </div>
 
-        <button type="submit">Update Profile</button>
-    </form>
+    <div class="form-group">
+        <label for="password">New Password (leave blank to keep current password)</label>
+        <input type="password" id="password" name="password">
+    </div>
+
+    <button type="submit">Update Profile</button>
+</form>
+</div>
+<hr>
+
+<div class="card settings-form">
+<h3>🌑Dark Mode</h3>
+
+<form method="POST" action="{{ url_for('settings') }}">
+    <input type="hidden" name="form_type" value="appearance">
+    <div class="form-group">
+        <label class="switch">
+            <input type="checkbox" id="darkModeToggle" name="dark_mode" {% if dark_mode %}checked{% endif %}>
+            <span class="slider round"></span>
+        </label>
+
+    </div>
+
+    <button type="submit">Save Preferences</button>
+</form>
+</div>
+<script>
+    const toggle = document.getElementById('darkModeToggle');
+    const userPrefersDark = {{ dark_mode|default(false)|tojson }};
+
+    if (userPrefersDark) {
+        document.body.classList.add('dark-mode');
+        toggle.checked = true;
+    }
+
+    toggle.addEventListener('change', () => {
+        if (toggle.checked) {
+            document.body.classList.add('dark-mode');
+        } else {
+            document.body.classList.remove('dark-mode');
+        }
+    });
+</script>
 {% endblock %}

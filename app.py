@@ -20,6 +20,7 @@ class User(db.Model, UserMixin):
     email = db.Column(db.String(150), unique=True, nullable=False)
     password = db.Column(db.String(256), nullable=False)
     date_joined = db.Column(db.DateTime, default=datetime.utcnow)
+    dark_mode = db.Column(db.Boolean, default=False)
 
     tasks = db.relationship('Task', backref='user', lazy=True)
 
@@ -84,6 +85,9 @@ def delete(id):
 
 @app.route('/edit/<int:id>',methods=['GET','POST'])
 def edit(id):
+    pending_tasks = Task.query.filter_by(user_id=current_user.id, completed=False).count()
+    completed_tasks = Task.query.filter_by(user_id=current_user.id, completed=True).count()
+    high_priority = Task.query.filter_by(user_id=current_user.id, priority='High').count()
     task=Task.query.get_or_404(id)
     if task.user_id!=current_user.id:
         flash("You do not have permission to edit this task",'danger')
@@ -100,7 +104,7 @@ def edit(id):
             db.session.commit()
             return redirect(url_for('home'))
 
-    return render_template('edit.html', task=task)
+    return render_template('edit.html', task=task, pending_tasks=pending_tasks,completed_tasks=completed_tasks, high_priority=high_priority)
 
 
 @app.route('/complete/<int:id>',methods=['POST'])
@@ -155,31 +159,45 @@ def login():
 @app.route('/profile')
 @login_required
 def profile():
-    return render_template('profile.html')
+    pending_tasks = Task.query.filter_by(user_id=current_user.id, completed=False).count()
+    completed_tasks = Task.query.filter_by(user_id=current_user.id, completed=True).count()
+    high_priority = Task.query.filter_by(user_id=current_user.id, priority='High').count()
+    return render_template('profile.html', pending_tasks=pending_tasks,completed_tasks=completed_tasks,high_priority=high_priority)
 
 
-@ app.route('/settings', methods=['GET', 'POST'])
-@ login_required
+@app.route('/settings', methods=['GET', 'POST'])
+@login_required
 def settings():
+    pending_tasks = Task.query.filter_by(user_id=current_user.id, completed=False).count()
+    completed_tasks = Task.query.filter_by(user_id=current_user.id, completed=True).count()
+    high_priority = Task.query.filter_by(user_id=current_user.id, priority='High').count()
     if request.method == 'POST':
-        new_username = request.form['username']
-        new_email = request.form['email']
-        new_password = request.form['password']
+        form_type = request.form.get('form_type')
 
-        # Update the user's information in the database
-        current_user.username = new_username
-        current_user.email = new_email
+        if form_type == 'profile':
+            new_username = request.form['username']
+            new_email = request.form['email']
+            new_password = request.form['password']
 
-        # If the user wants to update the password
-        if new_password:
-            current_user.password = generate_password_hash(new_password)
+            current_user.username = new_username
+            current_user.email = new_email
 
-        db.session.commit()
+            if new_password:
+                current_user.password = generate_password_hash(new_password)
 
-        flash('Profile updated successfully!', 'success')
-        return redirect(url_for('profile'))
+            db.session.commit()
+            flash('Profile updated successfully!', 'success')
+            return redirect(url_for('settings'))
 
-    return render_template('settings.html')
+        elif form_type == 'appearance':
+            dark_mode = request.form.get('dark_mode') == 'on'
+            current_user.dark_mode = dark_mode
+            db.session.commit()
+            flash('Appearance preferences saved!', 'success')
+            return redirect(url_for('settings'))
+
+    return render_template('settings.html', dark_mode=current_user.dark_mode,pending_tasks=pending_tasks,completed_tasks=completed_tasks,high_priority=high_priority)
+
 
 
 @app.route('/logout',methods=['POST'])

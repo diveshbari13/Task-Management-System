@@ -11,7 +11,7 @@
         <!-- Sidebar -->
         <aside class="sidebar">
             <div class="sidebar-header">
-                <h2 class="app-title">📝 TODO App</h2>
+                <h3 class="app-title">📝 Task Manager</h3>
                 {% if current_user.is_authenticated %}
                     <p class="welcome">👋 Hello, <strong>{{ current_user.username }}</strong></p>
                 {% endif %}
@@ -34,17 +34,11 @@
                     <li><strong>{{ high_priority }}</strong> High Priority</li>
                 </ul>
             </div>
-            <div class="dark-mode-toggle">
-                <label class="switch">
-                    <input type="checkbox" id="darkModeToggle">
-                    <span class="slider round"></span>
-                </label>
-                <span class="toggle-label">Dark Mode</span>
-            </div>
+
 
             {% if current_user.is_authenticated %}
                 <form action="{{ url_for('logout') }}" method="post" class="logout-form">
-                    <button type="submit" class="logout-btn">🚪 Logout</button>
+                    <button type="submit" class="logout-btn">🚪Logout</button>
                 </form>
             {% endif %}
         </aside>
@@ -61,25 +55,7 @@
             {% block content %}{% endblock %}
         </main>
     </div>
-<script>
-    const toggle = document.getElementById('darkModeToggle');
-    const userPrefersDark = localStorage.getItem('darkMode') === 'enabled';
 
-    if (userPrefersDark) {
-        document.body.classList.add('dark-mode');
-        toggle.checked = true;
-    }
-
-    toggle.addEventListener('change', () => {
-        if (toggle.checked) {
-            document.body.classList.add('dark-mode');
-            localStorage.setItem('darkMode', 'enabled');
-        } else {
-            document.body.classList.remove('dark-mode');
-            localStorage.setItem('darkMode', 'disabled');
-        }
-    });
-</script>
 
 </body>
 </html>

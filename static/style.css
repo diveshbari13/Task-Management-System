@@ -1,7 +1,7 @@
-/* Import Google Font */
+
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
 
-/* Reset & Base */
+
 * {
     margin: 0;
     padding: 0;
@@ -14,12 +14,12 @@ html, body {
     color: #212529;
 }
 
-/* Background color set here to ensure it applies across the app */
+
 body {
-    background-color: #e2e6ea; /* Grey background */
+    background-color: #e2e6ea;
     display: flex;
     flex-direction: column;
-    min-height: 100vh; /* Ensure body takes full height */
+    min-height: 100vh;
 }
 
 .container {
@@ -28,7 +28,7 @@ body {
     width: 100%;
 }
 
-/* Sidebar */
+
 .sidebar {
     width: 260px;
     background: #343a40;
@@ -43,7 +43,7 @@ body {
     border-right: 1px solid #495057;
 }
 
-.sidebar h2 {
+.sidebar h3 {
     color: #4fc3f7;
     margin-bottom: 30px;
     font-weight: 600;
@@ -312,29 +312,29 @@ body {
 /* Specific Styling for Icons within Task Actions */
 .task-button i {
     font-size: 1.2rem;
-    margin-right: 5px;  /* Adds space between icon and text */
+    margin-right: 5px;
 }
 
 /* If the buttons are used with icons */
 .task-button.delete i,
 .task-button.edit i,
 .task-button.complete i {
-    color: white;  /* Ensures icons are white */
+    color: white;
 }
 
 .task-button.delete:hover i,
 .task-button.edit:hover i,
 .task-button.complete:hover i {
-    color: white;  /* Keep icon white on hover */
+    color: white;
 }
 
 /* Styling for Task List Items */
 .task-card a {
-    color: white;  /* Ensures the links are white */
+    color: white;
 }
 
 .task-card a:hover {
-    color: #f44336;  /* Red when hovered */
+    color: #f44336;
 }
 
 /* === Dark Mode Toggle Switch === */
@@ -430,4 +430,131 @@ body.dark-mode .task-form select {
     background-color: #333;
     border: 1px solid #444;
     color: #fff;
+}
+
+.settings-form .form-group {
+    margin-bottom: 15px;
+}
+
+.settings-form label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 600;
+}
+
+.settings-form input[type="text"],
+.settings-form input[type="email"],
+.settings-form input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+.settings-form button {
+    background-color: #339af0;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.settings-form button:hover {
+    background-color: #228be6;
+}
+/* Profile Card */
+.profile-card {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding: 25px;
+    font-size: 1rem;
+}
+
+.profile-card p {
+    line-height: 1.6;
+}
+
+.edit-profile-btn {
+    align-self: flex-start;
+    margin-top: 10px;
+    padding: 10px 16px;
+    background-color: #4fc3f7;.form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    margin-bottom: 5px;
+    font-weight: 500;
+}
+
+    color: #fff;
+    text-decoration: none;
+    font-weight: 600;
+    border-radius: 6px;
+    transition: background-color 0.3s ease;
+}
+
+.edit-profile-btn:hover {
+    background-color: #38bdf8;
+}
+/* Form Styling */
+.form-container {
+    background-color: #333333;
+    border-radius: 10px;
+    padding: 30px 25px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.form-group {
+    margin-bottom: 25px;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 16px;
+}
+
+button {
+    padding: 12px;
+    border: none;
+    background-color: #4fc3f7;
+    color: white;
+    border-radius: 6px;
+    width: 100%;
+    font-size: 16px;
+    border: none
+    cursor: pointer;
+    margin-top: 10px
+    transition: background 0.3s;
+}
+
+button:hover {
+    background-color: #40c3f7;
+}
+
+/* Ensure the text "Already have an account?" is styled correctly */
+p {
+    text-align: center;
+    margin-top: 20px;
+}
+
+a {
+    color: #4fc3f7;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
 }
