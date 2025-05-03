@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flask TODO App</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h2 class="app-title">📝 TODO App</h2>
+                {% if current_user.is_authenticated %}
+                    <p class="welcome">👋 Hello, <strong>{{ current_user.username }}</strong></p>
+                {% endif %}
+            </div>
+
+            <nav class="sidebar-nav">
+                <ul>
+                    <li><a href="{{ url_for('home') }}">🏠 Home</a></li>
+                    <li><a href="{{ url_for('profile') }}">👤 Profile</a></li>
+                    <li><a href="{{ url_for('settings') }}">⚙️ Settings</a></li>
+                </ul>
+            </nav>
+
+            <!-- Task Overview -->
+            <div class="task-overview">
+                <h3>📊 Task Overview</h3>
+                <ul>
+                    <li><strong>{{ pending_tasks }}</strong> Pending</li>
+                    <li><strong>{{ completed_tasks }}</strong> Completed</li>
+                    <li><strong>{{ high_priority }}</strong> High Priority</li>
+                </ul>
+            </div>
+            <div class="dark-mode-toggle">
+                <label class="switch">
+                    <input type="checkbox" id="darkModeToggle">
+                    <span class="slider round"></span>
+                </label>
+                <span class="toggle-label">Dark Mode</span>
+            </div>
+
+            {% if current_user.is_authenticated %}
+                <form action="{{ url_for('logout') }}" method="post" class="logout-form">
+                    <button type="submit" class="logout-btn">🚪 Logout</button>
+                </form>
+            {% endif %}
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        <div class="flash {{ category }}">{{ message }}</div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+            {% block content %}{% endblock %}
+        </main>
+    </div>
+<script>
+    const toggle = document.getElementById('darkModeToggle');
+    const userPrefersDark = localStorage.getItem('darkMode') === 'enabled';
+
+    if (userPrefersDark) {
+        document.body.classList.add('dark-mode');
+        toggle.checked = true;
+    }
+
+    toggle.addEventListener('change', () => {
+        if (toggle.checked) {
+            document.body.classList.add('dark-mode');
+            localStorage.setItem('darkMode', 'enabled');
+        } else {
+            document.body.classList.remove('dark-mode');
+            localStorage.setItem('darkMode', 'disabled');
+        }
+    });
+</script>
+
+</body>
+</html>

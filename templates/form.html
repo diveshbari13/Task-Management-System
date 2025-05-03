@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Flask Form</title>
+</head>
+<body>
+<h1>fill the form</h1>
+<form method="POST">
+    <label> Your name:</label>
+    <input type="text" name="name" required>
+    <button type="submit">Submit</button>
+</form>
+{% if name %}
+<h2> Hello {{name}}</h2>
+{% endif %}
+
+</body>
+</html>

@@ -1,0 +1,433 @@
+/* Import Google Font */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
+
+/* Reset & Base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+    font-family: 'Inter', sans-serif;
+    color: #212529;
+}
+
+/* Background color set here to ensure it applies across the app */
+body {
+    background-color: #e2e6ea; /* Grey background */
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Ensure body takes full height */
+}
+
+.container {
+    display: flex;
+    flex: 1;
+    width: 100%;
+}
+
+/* Sidebar */
+.sidebar {
+    width: 260px;
+    background: #343a40;
+    color: #fff;
+    padding: 20px;
+    position: fixed;
+    height: 100%;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border-right: 1px solid #495057;
+}
+
+.sidebar h2 {
+    color: #4fc3f7;
+    margin-bottom: 30px;
+    font-weight: 600;
+}
+
+.sidebar p {
+    font-size: 15px;
+    color: #ced4da;
+}
+
+.sidebar ul {
+    list-style-type: none;
+    padding: 0;
+    margin-top: 20px;
+}
+
+.sidebar a {
+    display: block;
+    color: #f1f3f5;
+    text-decoration: none;
+    padding: 10px 15px;
+    margin: 5px 0;
+    border-radius: 6px;
+    transition: background 0.3s;
+}
+
+.sidebar a:hover {
+    background: #495057;
+}
+
+.sidebar a.active {
+    background: #4fc3f7;
+    color: #212529;
+    font-weight: 600;
+}
+
+/* Task Overview */
+.task-overview {
+    margin-top: 40px;
+    border-top: 1px solid #495057;
+    padding-top: 20px;
+}
+
+.task-overview h3 {
+    font-size: 16px;
+    margin-bottom: 10px;
+    color: #adb5bd;
+}
+
+.task-overview ul {
+    list-style: none;
+    padding: 0;
+    font-size: 14px;
+}
+
+.task-overview li {
+    margin-bottom: 8px;
+    color: #dee2e6;
+}
+
+/* Logout Button */
+.logout-form {
+    margin-top: auto;
+}
+
+.logout-btn {
+    margin-top: 20px;
+    background: #e03131;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 6px;
+    width: 100%;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.logout-btn:hover {
+    background: #c92a2a;
+}
+
+/* Main Content */
+.main-content {
+    margin-left: 260px;
+    padding: 40px;
+    width: calc(100% - 260px);
+    overflow-y: auto;
+}
+
+.card {
+    background: white;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+/* Flash Messages */
+.flash {
+    padding: 12px 20px;
+    margin-bottom: 20px;
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+.flash.success {
+    background-color: #d1e7dd;
+    color: #0f5132;
+    border: 1px solid #badbcc;
+}
+
+.flash.danger {
+    background-color: #f8d7da;
+    color: #842029;
+    border: 1px solid #f5c2c7;
+}
+
+/* Scrollbar Styling */
+.sidebar::-webkit-scrollbar {
+    width: 6px;
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+    background-color: #495057;
+    border-radius: 3px;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .sidebar {
+        position: relative;
+        width: 100%;
+        height: auto;
+        flex-direction: row;
+        overflow: visible;
+    }
+
+    .main-content {
+        margin-left: 0;
+        width: 100%;
+        padding: 20px;
+    }
+}
+
+/* Task Actions */
+.task-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.task-button {
+    padding: 6px 12px;
+    font-size: 14px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    outline: none;
+    box-shadow: none
+}
+
+.task-button.complete {
+    background-color: #51cf66;
+    color: white;
+}
+
+.task-button.complete:hover {
+    background-color: #40c057;
+}
+
+.task-button.edit {
+    background-color: #339af0;
+    color: white;
+}
+
+.task-button.edit:hover {
+    background-color: #228be6;
+}
+
+.task-button.delete {
+    background-color: #dc3545;
+    color: white;
+}
+
+.task-button.delete:hover {
+    background-color: #f03e3e;
+}
+
+/* Form styles in both modes */
+.task-form {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+    background-color: #ffffff;
+    border-radius: 10px;
+    padding: 15px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+/* Task List */
+.task-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.task-card {
+    background: #fff;
+    padding: 15px 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.task-card.completed {
+    opacity: 0.6;
+}
+
+.task-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.task-content {
+    font-weight: 600;
+    font-size: 1rem;
+}
+
+.due-date {
+    font-size: 0.85rem;
+    color: #888;
+    margin-left: 10px;
+}
+
+.priority-tag {
+    font-size: 0.75rem;
+    padding: 4px 8px;
+    border-radius: 20px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.priority-tag.high {
+    background: #ffcdd2;
+    color: #c62828;
+}
+.priority-tag.medium {
+    background: #ffe082;
+    color: #f57f17;
+}
+.priority-tag.low {
+    background: #c8e6c9;
+    color: #2e7d32;
+}
+
+/* Specific Styling for Icons within Task Actions */
+.task-button i {
+    font-size: 1.2rem;
+    margin-right: 5px;  /* Adds space between icon and text */
+}
+
+/* If the buttons are used with icons */
+.task-button.delete i,
+.task-button.edit i,
+.task-button.complete i {
+    color: white;  /* Ensures icons are white */
+}
+
+.task-button.delete:hover i,
+.task-button.edit:hover i,
+.task-button.complete:hover i {
+    color: white;  /* Keep icon white on hover */
+}
+
+/* Styling for Task List Items */
+.task-card a {
+    color: white;  /* Ensures the links are white */
+}
+
+.task-card a:hover {
+    color: #f44336;  /* Red when hovered */
+}
+
+/* === Dark Mode Toggle Switch === */
+.dark-mode-toggle {
+    margin-top: 30px;
+    display: flex;
+    align-items: center;
+    color: #ccc;
+    font-size: 14px;
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 50px;
+    height: 24px;
+    margin-right: 10px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0; left: 0;
+    right: 0; bottom: 0;
+    background-color: #ccc;
+    transition: .4s;
+    border-radius: 34px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 18px;
+    width: 18px;
+    left: 3px;
+    bottom: 3px;
+    background-color: white;
+    transition: .4s;
+    border-radius: 50%;
+}
+
+input:checked + .slider {
+    background-color: #4fc3f7;
+}
+
+input:checked + .slider:before {
+    transform: translateX(26px);
+}
+
+/* === Dark Mode Overrides === */
+body.dark-mode {
+    background-color: #121212;
+    color: #f1f1f1;
+}
+
+body.dark-mode .main-content {
+    background-color: #1e1e1e;
+}
+
+body.dark-mode .card,
+body.dark-mode .task-card {
+    background-color: #2a2a2a;
+    color: #fff;
+}
+
+body.dark-mode .sidebar {
+    background-color: #212529;
+}
+
+body.dark-mode .sidebar a {
+    color: #e0e0e0;
+}
+
+body.dark-mode .sidebar a.active {
+    background: #4fc3f7;
+    color: #121212;
+}
+
+body.dark-mode .task-form {
+    background-color: #1e1e1e;
+    color: #fff;
+    box-shadow: none;
+}
+
+body.dark-mode .task-form input,
+body.dark-mode .task-form select {
+    background-color: #333;
+    border: 1px solid #444;
+    color: #fff;
+}

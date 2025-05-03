@@ -1,0 +1,13 @@
+{% extends "layout.html" %}
+
+{% block content %}
+    <h2>User Profile</h2>
+
+    <div class="profile-details">
+        <p><strong>Username:</strong> {{ current_user.username }}</p>
+        <p><strong>Email:</strong> {{ current_user.email }}</p>
+        <p><strong>Joined:</strong> {{ current_user.date_joined.strftime('%Y-%m-%d') }}</p>
+    </div>
+
+    <a href="{{ url_for('settings') }}">Edit Profile</a> <!-- Link to settings page -->
+{% endblock %}
